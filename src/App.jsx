@@ -1,26 +1,39 @@
 "use strict"
 
-import React, { useState, useEffect } from "react"
-import logo from "./logo.svg"
+import React from "react"
+import "antd/dist/antd.css"
 import "./App.css"
+import { Layout, Menu, Breadcrumb } from "antd"
+
+const { Header, Content, Footer } = Layout
 
 const App = () => {
-	const [count, setCount] = useState(0)
-
-	useEffect(() => {
-		const timer = setTimeout(() => setCount(count + 1), 1000)
-		return () => clearTimeout(timer)
-	}, [count, setCount])
-
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} alt="logo" className="App-logo" />
-				<p>
-					Page has been open for <code>{count}</code> seconds.
-				</p>
-			</header>
-		</div>
+		<Layout className="layout">
+			<Header>
+				<div className="logo" />
+				<Menu
+					theme="dark"
+					mode="horizontal"
+					defaultSelectedKeys={["2"]}>
+					{new Array(15).fill(null).map((_, index) => {
+						const key = index + 1
+						return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>
+					})}
+				</Menu>
+			</Header>
+			<Content style={{ padding: "0 50px" }}>
+				<Breadcrumb style={{ margin: "16px 0" }}>
+					<Breadcrumb.Item>Home</Breadcrumb.Item>
+					<Breadcrumb.Item>List</Breadcrumb.Item>
+					<Breadcrumb.Item>App</Breadcrumb.Item>
+				</Breadcrumb>
+				<div className="site-layout-content">Content</div>
+			</Content>
+			<Footer style={{ textAlign: "center" }}>
+				Ant Design ©2018 Created by Ant UED
+			</Footer>
+		</Layout>
 	)
 }
 
